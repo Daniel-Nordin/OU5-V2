@@ -1,3 +1,5 @@
+import java.util.Random;
+
 class ValjPolylinje
 {
     public static final Random rand = new Random ();
@@ -9,11 +11,19 @@ class ValjPolylinje
         for (int i = 0; i < ANTAL_POLYLINJER; i++)
             polylinjer[i] = slumpPolylinje ();
 // visa polylinjerna
+        for (int i = 0; i < ANTAL_POLYLINJER; i++){
+            System.out.println(polylinjer[i]);
+        }
 // bestäm den kortaste av de polylinjer som är gula
+        Polylinje kortastPoly = polylinjer[0];
+        for (int i = 1; i < ANTAL_POLYLINJER; i++){
+            if (polylinjer[i].getFarg() == "gul" && polylinjer[i].langd() < kortastPoly.langd())
+                kortastPoly = polylinjer[i];
+        }
 // visa den valda polylinjen
+        System.out.println();
+        System.out.println(kortastPoly);
     }
-    ID1018 Programmering I OU5 Fadil Galjic
-    Från boken Programmeringsprinciper i Java : Exempel och övningar (Fadil Galjic & Studentlitteratur)
     // slumpPunkt returnerar en punkt med ett slumpmässigt namn, som är en stor bokstav i
 // det engelska alfabetet, och slumpmässiga koordinater.
     public static Punkt slumpPunkt ()
@@ -36,9 +46,36 @@ class ValjPolylinje
 // ett och samma namn kan inte förekomma flera gånger
         Punkt valdPunkt = null;
         char valtChar = 0;
+        int asciiVal = 0;
         while (antalValdaHorn < antalHorn)
         {
+            valdPunkt = slumpPunkt();
+            valtChar = valdPunkt.namn.charAt(0);
+            asciiVal = (int) (valtChar) - 65;
+            if(valdaNamn[asciiVal]){
+
+            }
+            else {
+                valdaNamn[asciiVal] = true;
+                polylinje.laggTill(valdPunkt);
+                antalValdaHorn++;
+            }
         }
 // sätt färg
+        int Valdfarg = rand.nextInt(3);
+        switch (Valdfarg) {
+            case 0:
+                polylinje.setFarg("blå");
+                break;
+
+            case 1:
+                polylinje.setFarg("röd");
+                break;
+
+            case 2:
+                polylinje.setFarg("gul");
+                break;
+        }
+        return polylinje;
     }
 }

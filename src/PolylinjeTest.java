@@ -27,5 +27,11 @@ public class PolylinjeTest {
         System.out.println(pL2);
         System.out.println(pLinje);
 
+        Polylinje.PolylinjeIterator polyIterator = pLinje.new PolylinjeIterator();
+        while (polyIterator.finnsHorn()){
+            System.out.println(polyIterator.horn());
+            polyIterator.gaFram();
+        }
+
     }
 }
